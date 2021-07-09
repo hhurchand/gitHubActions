@@ -12,9 +12,7 @@ jobs:
     - name: Build the Docker image
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-       echo "Hello World"
-       docker build . --file Dockerfile --tag hhurchand/bdeb_tp1:v0
-       pip install -r requirements.txt
-       pip install mlflow
-       mlflow run . -e train.py
+      runs:
+        using: 'docker'
+        image: 'Dockerfile'
+
