@@ -14,5 +14,5 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
        docker build . --file Dockerfile --tag hhurchand/bdeb_tp1:v0
-       docker run -v “/home/runner/work/actions/actions”:"/app"
+       docker run -v “/home/runner/work/actions/actions”:"/app" hhurchand/bdeb_tp1:v0
 
