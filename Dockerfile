@@ -7,4 +7,6 @@ COPY conda.yaml .
 COPY train.py .
 COPY BostonData.csv .
 COPY MLproject .
+RUN pip install mlflow
+CMD ["mlflow","run",".","-e","train.py"]
 
