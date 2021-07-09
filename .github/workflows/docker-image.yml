@@ -12,11 +12,9 @@ jobs:
         run: |
           # Your ML workflow goes here
           pip install -r requirements.txt
-          python train.py
+          pip install mlflow
+          mlflow run . -e train.py
           # Write your CML report
           echo "## Metriques:" >> report.md
           cat metrics.txt >> report.md
-          command:
-          - /bin/sh
-          - -c
-          - cp /app/* /usr/local/
+
