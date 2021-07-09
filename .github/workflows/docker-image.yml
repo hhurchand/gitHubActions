@@ -14,6 +14,4 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       run: |
        docker build . --file Dockerfile --tag hhurchand/bdeb_tp1:v0
-       pip install -r requirements.txt
-       pip install mlflow
 
