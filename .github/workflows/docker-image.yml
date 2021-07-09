@@ -10,4 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag bdeb_tp1:$(date +%s)
+      env:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+       echo "Hello World"
+       docker build . --file Dockerfile --tag hhurchand/bdeb_tp1:v0
+       docker push hhurchand/bdeb_tp1:v0
+       pip install -r requirements.txt
+       pip install mlflow
+       mlflow run . -e train.py
