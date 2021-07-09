@@ -15,7 +15,6 @@ jobs:
       run: |
        echo "Hello World"
        docker build . --file Dockerfile --tag hhurchand/bdeb_tp1:v0
-       docker push hhurchand/bdeb_tp1:v0
        pip install -r requirements.txt
        pip install mlflow
        mlflow run . -e train.py
