@@ -10,7 +10,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Your ML workflow goes here
-          docker build -t hhurchand/bdeb_tp1:1.0.0
+          docker build -f Dockerfile -t hhurchand/bdeb_tp1:1.0.0
           docker run -d --name devtest -v myvol2:/app bdeb_tp1:1.0.0 
 
 
