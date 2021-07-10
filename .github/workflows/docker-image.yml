@@ -11,6 +11,6 @@ jobs:
         run: |
           # Your ML workflow goes here
           docker build -f Dockerfile -t hhurchand/bdeb_tp1:1.0.0 .
-          docker run -d --name devtest -v https://github.com/hhurchand/gitHubActions/myvol2:/app -p 8080:8080 hhurchand/bdeb_tp1:1.0.0 
+          docker run -d --name devtest -v myvol2:/app -p 8080:8080 hhurchand/bdeb_tp1:1.0.0 
 
 
