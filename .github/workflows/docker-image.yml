@@ -1,15 +1,14 @@
-name: Docker Image CI
-
-on:
-  push:
-    branches: [ main ]
+name: model-supervisé RL
+on: [push]
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
+  run:
+    runs-on: [ubuntu-latest]
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag bdeb_tp1:$(date +%s)
+      - uses: actions/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Your ML workflow goes here
+          docker build -f Dockerfile -t hhurchand/bdeb_tp1:1.0.0 .
+          docker run -d --name devtest -v myvol2:/app -p 8080:8080 hhurchand/bdeb_tp1:1.0.0 
