@@ -8,7 +8,9 @@ jobs:
       - uses: shrink/actions-docker-extract@v1
         with:
           image: hhurchand/bdeb_mlflow_boston:latest
-          path: '/app/mlruns'
+          path: '/app/'
+          run : |
+            docker run bdeb_mlflow_boston:latest
       - name: Upload Dist
         uses: actions/upload-artifact@v2
         with:
