@@ -3,7 +3,6 @@ on: [push]
 jobs:
   run:
     runs-on: [ubuntu-latest]
-    container: docker://hhurchand/bdeb_mlflow_boston:latest
     steps:
       - uses: actions/checkout@v2
       - name: cml_run
@@ -11,10 +10,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Your ML workflow goes here
-          pip install -r requirements.txt
-          pip install mlflow
-          mlflow run . -e train.py
-          # Write your CML report
-          echo "## Metriques:" >> report.md
-          cat metrics.txt >> report.md
+          docker build -t hhurchand/bdeb_tp1:1.0.0
+          docker run -d --name devtest -v myvol2:/app bdeb_tp1:1.0.0 
+
 
