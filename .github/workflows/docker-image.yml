@@ -1,15 +1,16 @@
 name: model-supervisé RL
 on: [push]
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run:
+    runs-on: [ubuntu-latest]
     steps:
-      - name: run code
-         runs:|
-          docker run hhurchand/bdeb_mlflow_boston:latest
-          echo "Done"
-          mlflow ui
+      - uses: actions/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Your ML workflow goes here
+          docker run --name devtest -v myvol2:/app -p 8080:8080 hhurchand/bdeb_mlflow_boston:latest
       - name: Upload mlruns
         uses: actions/upload-artifact@v2
         with:
