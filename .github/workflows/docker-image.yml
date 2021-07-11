@@ -10,13 +10,8 @@ jobs:
       - name: Build Image
         run: |
           docker run hhurchand/bdeb_mlflow_boston:latest
-          mkdir -p path/to/artifacts
-          docker save app/. > path/to/artifacts/ml
-          echo "$DOCKER_FULLTAG" > path/to/artifacts/docker-tag
-          
-      - name: Temporarily save Docker file
+      - name: Upload model.pkl 
         uses: actions/upload-artifact@v2
         with:
-          name: docker-artifact
-          path: path/to/artifacts
-          retention-days: 1
+         name: my-artifact
+         path: model.pkl
