@@ -2,14 +2,21 @@ name: model-supervisé RL
 on: [push]
 
 jobs:
-  build:
+  docker_build:
     runs-on: ubuntu-latest
+    name: Docker Build
     steps:
-      - name: run code
-         runs:|
+      - uses: actions/checkout@v2  
+      - name: Build Image
+        run: |
           docker run hhurchand/bdeb_mlflow_boston:latest
-      - name: Upload mlruns
+          mkdir -p path/to/artifacts
+          docker save app/mlruns > path/to/artifacts/ml
+          echo "$DOCKER_FULLTAG" > path/to/artifacts/docker-tag
+          
+      - name: Temporarily save Docker file
         uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
-          path: /app/train.py
+          name: docker-artifact
+          path: path/to/artifacts
+          retention-days: 1
