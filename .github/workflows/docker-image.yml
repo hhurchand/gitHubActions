@@ -11,7 +11,7 @@ jobs:
         run: |
           docker run hhurchand/bdeb_mlflow_boston:latest
           mkdir -p path/to/artifacts
-          docker save app/mlruns > path/to/artifacts/ml
+          docker save app/. > path/to/artifacts/ml
           echo "$DOCKER_FULLTAG" > path/to/artifacts/docker-tag
           
       - name: Temporarily save Docker file
