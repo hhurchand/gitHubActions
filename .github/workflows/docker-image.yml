@@ -10,8 +10,8 @@ jobs:
       - name: Build Image
         run: |
           docker run hhurchand/bdeb_mlflow_boston:latest
-      - name: Upload model.pkl 
+      - name: Upload train.py 
         uses: actions/upload-artifact@v2
         with:
          name: my-artifact
-         path: app/model.pkl
+         path: train.py
