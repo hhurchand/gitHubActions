@@ -10,8 +10,8 @@ jobs:
       - name: Build Image
         run: |
           docker run hhurchand/bdeb_mlflow_boston:latest
-      - name: Upload all 
+      - name: Upload Dockerfile 
         uses: actions/upload-artifact@v2
         with:
          name: my-artifact
-         path: .
+         path: Dockerfile
