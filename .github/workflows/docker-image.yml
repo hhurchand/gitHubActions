@@ -8,7 +8,6 @@ jobs:
       - name: run code
          runs:|
           docker run hhurchand/bdeb_mlflow_boston:latest
-          echo "Done"
       - name: Upload mlruns
         uses: actions/upload-artifact@v2
         with:
