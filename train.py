@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import mlflow
 import mlflow.sklearn
+import pickle
  
 import logging
 logging.basicConfig(level=logging.WARN)
@@ -118,7 +119,7 @@ model = reg.fit(X_train,y_train)
 
 # In[17]:
 
-
+pickle.dump(model,open('model.pkl','wb'))
 print("y-intercept",model.coef_[0])
 
 
