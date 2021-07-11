@@ -2,14 +2,16 @@ name: model-supervisé RL
 on: [push]
 
 jobs:
-  build:
+  docker_build:
     runs-on: ubuntu-latest
+    name: Docker Build
     steps:
-      - name: run code
-         runs:|
+      - uses: actions/checkout@v2  
+      - name: Build Image
+        run: |
           docker run hhurchand/bdeb_mlflow_boston:latest
-      - name: Upload mlruns
+      - name: Upload model.pkl 
         uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
-          path: /app/.
+         name: my-artifact
+         path: model.pkl
