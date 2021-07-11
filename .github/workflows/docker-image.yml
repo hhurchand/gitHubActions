@@ -5,12 +5,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: shrink/actions-docker-extract@v1
-        with:
-          image: hhurchand/bdeb_mlflow_boston:latest
-          path: '/app/mlruns'
-      - name: Upload Dist
+      - name: run code
+         runs:|
+          docker run --name devtest -v myvol2:/app -p 8080:8080 hhurchand/bdeb_mlflow_boston:latest
+      - name: Upload mlruns
         uses: actions/upload-artifact@v2
         with:
-          path: ${{ steps.extract.outputs.destination }}
-          name: dist
+          name: my-artifact
+          path: mlruns
+
