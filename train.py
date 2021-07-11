@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import mlflow
 import mlflow.sklearn
+import pickle
  
 import logging
 logging.basicConfig(level=logging.WARN)
@@ -114,6 +115,7 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
 from sklearn.linear_model import LinearRegression
 reg = LinearRegression()
 model = reg.fit(X_train,y_train)
+pickle.dump(model,open('model.pkl','wb'))
 
 
 # In[17]:
