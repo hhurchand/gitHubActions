@@ -3,6 +3,10 @@
 
 # In[1]:
 
+import os
+import lightgbm as lgb
+import neptune
+from neptunecontrib.monitoring.lightgbm import neptune_monitor
 
 import numpy as np
 import pandas as pd
@@ -108,6 +112,16 @@ y = df0["MEDV"]
 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
 
+lgb_train = lgb.Dataset(X_train, y_train)
+lgb_eval = lgb.Dataset(X_test, y_test, reference=lgb_train)
+
+neptune.init(api_token=os.getenv('NEPTUNE_API_TOKEN'),
+            project_qualified_name=os.getenv('NEPTUNE_PROJECT_NAME'))
+
+neptune.create_experiment('BostonData-NEPTUNE')
+
+
+
 
 # In[16]:
 
@@ -117,7 +131,17 @@ reg = LinearRegression()
 model = reg.fit(X_train,y_train)
 pickle.dump(model,open('model.pkl','wb'))
 
+y_pred = model.predict(X_test)
 
+from sklearn.metrics import mean_squared_error, r2_score
+import math
+mse = mean_squared_error(y_test, y_pred, squared=False)
+rmse = math.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
+
+neptune.log_metric('mse',mse)
+neptune.log_metric('rmse', rmse)
+neptune.log_metric('r2', r2)
 # In[17]:
 
 
@@ -129,9 +153,9 @@ print("y-intercept",model.coef_[0])
 ## UNCOMMENT FOR MLFLOW REPORTING
 #mlflow.set_experiment(experiment_name="experiment1")
 #mlflow.set_tracking_uri("http://localhost:5000")
-with mlflow.start_run():
-    mlflow.log_param("alpha1",model.coef_[0])
-    mlflow.log_param("beta1",model.coef_[1])
+#with mlflow.start_run():
+#    mlflow.log_param("alpha1",model.coef_[0])
+#    mlflow.log_param("beta1",model.coef_[1])
 
 
 # In[ ]:
