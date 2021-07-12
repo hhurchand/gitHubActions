@@ -35,7 +35,7 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: main
 
       - name: Setup main branch environment and run experiment
         id: experiment_main
